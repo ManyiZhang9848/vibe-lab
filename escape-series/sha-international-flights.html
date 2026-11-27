@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从上海虹桥出发 · 航班总览（国内 / 国外）</title>
+<style>
+  :root{
+    --bg:#0f1226; --card:#1a1f3d; --card2:#222a52; --line:#2e3766;
+    --txt:#eef1ff; --sub:#9aa3d0; --accent:#5b8cff; --accent2:#34d399;
+    --warn:#ffb454; --rmt:#a78bfa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:radial-gradient(1200px 600px at 70% -10%,#243069 0%,var(--bg) 55%);color:var(--txt);
+    line-height:1.6;padding:20px 14px 60px;max-width:860px;margin:0 auto}
+  h1{font-size:1.5rem;letter-spacing:.5px;margin-bottom:4px}
+  .sub{color:var(--sub);font-size:.9rem;margin-bottom:16px}
+  .banner{background:linear-gradient(135deg,#3a2150,#23306b);border:1px solid var(--line);
+    border-left:4px solid var(--warn);border-radius:12px;padding:13px 15px;margin-bottom:18px;font-size:.82rem}
+  .banner b{color:var(--warn)}
+  .tabs{display:flex;gap:8px;margin-bottom:16px}
+  .tab{flex:1;text-align:center;background:var(--card);border:1px solid var(--line);color:var(--sub);
+    padding:12px;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.15s}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .tab.intl.active{background:var(--rmt);border-color:var(--rmt)}
+  .controls{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:18px}
+  .dates{display:flex;flex-wrap:wrap;gap:12px}
+  .dates label{display:flex;flex-direction:column;font-size:.78rem;color:var(--sub);gap:6px;flex:1;min-width:140px}
+  .dates input{background:var(--card2);border:1px solid var(--line);color:var(--txt);
+    border-radius:8px;padding:9px 10px;font-size:.95rem}
+  .hint{font-size:.76rem;color:var(--sub);margin-top:10px}
+  /* international */
+  .grid{display:grid;gap:14px}
+  .dest{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px;position:relative;overflow:hidden}
+  .dest::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent2)}
+  .dest.rmt::before{background:var(--rmt)}
+  .dhead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .flag{font-size:2rem;line-height:1}
+  .dtitle{font-size:1.2rem;font-weight:700}
+  .tag{font-size:.7rem;padding:3px 9px;border-radius:999px;font-weight:600}
+  .tag.foreign{background:rgba(52,211,153,.15);color:var(--accent2);border:1px solid var(--accent2)}
+  .tag.rmt{background:rgba(167,139,250,.15);color:var(--rmt);border:1px solid var(--rmt)}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.82rem;color:var(--sub);margin-bottom:10px}
+  .meta span b{color:var(--txt);font-weight:600}
+  .air{font-size:.82rem;color:var(--sub);margin-bottom:12px}
+  .air b{color:var(--txt)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .btn{flex:1;min-width:150px;text-align:center;background:var(--accent);color:#fff;border:none;
+    border-radius:10px;padding:11px;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;
+    display:inline-block;transition:.15s}
+  .btn:hover{filter:brightness(1.1)}
+  .btn.alt{background:var(--card2);border:1px solid var(--line);color:var(--txt)}
+  .sample{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;font-size:.8rem;color:var(--sub)}
+  .sample summary{cursor:pointer;color:var(--accent);font-size:.82rem;outline:none}
+  .sample table{width:100%;border-collapse:collapse;margin-top:8px}
+  .sample td{padding:5px 4px;border-bottom:1px solid var(--line);font-size:.78rem}
+  .sample .price{color:var(--accent2);font-weight:700;text-align:right}
+  .note{font-size:.72rem;color:var(--sub);margin-top:6px;font-style:italic}
+  /* domestic */
+  .region{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+  .rhead{font-size:.95rem;font-weight:700;color:var(--accent2);margin-bottom:10px;
+    display:flex;align-items:center;gap:8px}
+  .rhead .n{font-size:.78rem;color:var(--sub);font-weight:400}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .city{background:var(--card2);border:1px solid var(--line);color:var(--txt);
+    padding:8px 13px;border-radius:999px;font-size:.85rem;text-decoration:none;
+    display:inline-flex;align-items:center;gap:6px;transition:.15s}
+  .city:hover{border-color:var(--accent);color:var(--accent)}
+  .city .arr{font-size:.8rem;opacity:.7}
+  .domnote{font-size:.8rem;color:var(--sub);background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:13px 15px;margin-bottom:16px}
+  .domnote b{color:var(--txt)}
+  .count{font-size:.8rem;color:var(--sub);margin-bottom:10px}
+  footer{margin-top:26px;font-size:.74rem;color:var(--sub);text-align:center;line-height:1.8}
+  footer a{color:var(--accent)}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+  <h1>✈️ 从上海虹桥出发 · 航班总览</h1>
+  <div class="sub">Shanghai Hongqiao (SHA) ｜ 国内一屏 · 国外/地区一屏 ｜ 含往返一键比价</div>
+
+  <div class="banner">
+    <b>先说清楚：</b>虹桥（SHA）以国内线为主。据上海机场集团 2026 夏秋航季数据，虹桥日均约 <b>786 班</b>，
+    其中国内约 <b>740 班</b>、国际/地区约 <b>46 班</b>。所有欧美、多数东南亚长航线都从浦东（PVG）起飞。
+    下方「国外/地区」页是虹桥直飞出境的<b>全部 5 个</b>航点；🇭🇰香港/🇲🇴澳门/🇹🇼台北属「港澳台地区」，已用紫色标签区分，严格意义的「国外」只有 🇯🇵日本、🇰🇷韩国。
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-t="dom">🏠 国内航班</div>
+    <div class="tab intl" data-t="intl">🌏 国外 / 地区航班</div>
+  </div>
+
+  <div class="controls">
+    <div class="dates">
+      <label>去程日期
+        <input type="date" id="dep" value="2026-11-01">
+      </label>
+      <label>返程日期（往返）
+        <input type="date" id="ret" value="2026-11-08">
+      </label>
+    </div>
+    <div class="hint">选择日期后，点任意航点/城市的「查往返」按钮即按该日期跳转到全网比价（始终最新）。</div>
+  </div>
+
+  <!-- 国内 -->
+  <section id="dom">
+    <div class="domnote">
+      🏠 <b>国内直飞航点（主要）</b>：虹桥国内日均约 740 班，覆盖 <b>70+ 城市</b>。下表为 2026 航季公开数据中的主要航点（按大区分组），
+      点城市即可查往返机票。若想查的某城市未列出，用下方搜索框输入即可。
+    </div>
+    <div class="grid" id="domGrid"></div>
+    <div style="margin-top:14px" class="region">
+      <div class="rhead">🔎 查任意国内城市 <span class="n">输入后回车 / 点按钮</span></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input id="cityInput" placeholder="如：杭州、三亚、丽江…" 
+          style="flex:1;min-width:180px;background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:10px">
+        <button id="cityGo" class="btn" style="flex:0 0 auto;min-width:120px">查往返机票</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 国外 -->
+  <section id="intl" class="hidden">
+    <div class="count" id="count"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer>
+    数据来源：上海机场集团航班换季公告、FlightConnections、携程 / 同程实时航班页（采集于 2026-10-19）。<br>
+    航点 / 航司为相对稳定的航线信息；<b>实时航班号、时刻与价格请务必点击按钮以全网最新为准</b>。<br>
+    本页为离线单文件，可保存或转发；如需手机在线链接可一键发布。
+  </footer>
+
+<script>
+const intlRoutes = [
+  {city:"东京",country:"日本 · 国外",flag:"🇯🇵",region:"foreign",airport:"HND · 东京羽田机场",
+   airlines:["中国东方航空 MU","上海航空 FM","全日空 ANA","日本航空 JL"],
+   duration:"约 3h10m",freq:"每日约 4 班（每周 26 班）",
+   sample:[{f:"FM815",t:"08:20 → 12:30",p:"示例 ¥1902"},{f:"FM3035",t:"09:30 → 13:30",p:"示例 ¥2000+"},{f:"JL / NH",t:"白天多班",p:"以实时为准"}]},
+  {city:"首尔",country:"韩国 · 国外",flag:"🇰🇷",region:"foreign",airport:"GMP · 首尔金浦机场（市区）",
+   airlines:["中国东方航空 MU","上海航空 FM","韩亚航空 OZ"],
+   duration:"约 1h55m",freq:"每日多班",
+   sample:[{f:"MU8601 / FM823",t:"16:55 → 19:50",p:"示例 ¥2476"},{f:"OZ3625",t:"虹桥出发",p:"以实时为准"}]},
+  {city:"香港",country:"中国香港 · 港澳台",flag:"🇭🇰",region:"rmt",airport:"HKG · 香港国际机场",
+   airlines:["中国东方航空 MU","上海航空 FM","国泰航空 CX"],
+   duration:"约 2h40m",freq:"每日多班",
+   sample:[{f:"MU721",t:"08:15 → 11:00",p:"示例 ¥1346"},{f:"MU5017",t:"09:10 → 11:50",p:"示例 ¥1333"},{f:"FM809",t:"15:00 → 17:40",p:"以实时为准"}]},
+  {city:"澳门",country:"中国澳门 · 港澳台",flag:"🇲🇴",region:"rmt",airport:"MFM · 澳门国际机场",
+   airlines:["中国东方航空 MU","上海航空 FM"],
+   duration:"约 2h30m–2h55m",freq:"每日多班",
+   sample:[{f:"MU2055 / FM3003",t:"16:05 → 19:00",p:"示例 ¥1796"},{f:"MU239 / FM3009",t:"16:45 → 19:15",p:"示例 ¥2265"}]},
+  {city:"台北",country:"中国台湾 · 港澳台",flag:"🇹🇼",region:"rmt",airport:"TSA · 台北松山机场（市区）",
+   airlines:["中国东方航空 MU","上海航空 FM","中华航空 CI"],
+   duration:"约 2h00m",freq:"每日多班",
+   sample:[{f:"FM815 / FM851",t:"08:20 → 10:15",p:"以实时为准"},{f:"CI202",t:"16:15 → 18:15",p:"示例 ¥4348"}]}
+];
+
+const intlCode = {东京:"hnd",首尔:"gmp",香港:"hkg",澳门:"mfm",台北:"tsa"};
+
+const domestic = [
+  {region:"华北",note:"北京/天津/河北/山西/内蒙古",cities:[
+    {n:"北京(大兴)",c:"pkx"},{n:"天津",c:"tsn"},{n:"石家庄",c:"sjw"},{n:"太原",c:"tyn"},{n:"呼和浩特",c:"het"}]},
+  {region:"华东",note:"山东/福建等",cities:[
+    {n:"济南",c:"tna"},{n:"青岛",c:"tao"},{n:"烟台",c:"ynt"},{n:"东营",c:"doy"},{n:"厦门",c:"xmn"},{n:"福州",c:"foc"}]},
+  {region:"华南",note:"广东/海南/广西",cities:[
+    {n:"广州",c:"can"},{n:"深圳",c:"szx"},{n:"揭阳潮汕",c:"swa"},{n:"海口",c:"hak"},{n:"南宁",c:"nng"},{n:"惠州",c:"huz"}]},
+  {region:"华中",note:"湖北/湖南",cities:[
+    {n:"武汉",c:"wuh"},{n:"长沙",c:"csx"}]},
+  {region:"西南",note:"川渝/云贵",cities:[
+    {n:"成都(双流)",c:"ctu"},{n:"重庆",c:"ckg"},{n:"贵阳",c:"kwe"},{n:"昆明",c:"kmg"},{n:"大理",c:"dlu"}]},
+  {region:"西北",note:"陕西/新疆",cities:[
+    {n:"西安",c:"xiy"},{n:"乌鲁木齐",c:"urc"}]},
+  {region:"东北",note:"辽宁/吉林/黑龙江",cities:[
+    {n:"大连",c:"dlc"},{n:"长春",c:"cgq"},{n:"佳木斯",c:"jmu"}]}
+];
+
+const depEl=document.getElementById("dep"), retEl=document.getElementById("ret");
+function dep(){return depEl.value||"2026-11-01";}
+function ret(){return retEl.value||"2026-11-08";}
+function sky(from,to){return `https://www.skyscanner.com/transport/flights/${from}/${to}/${dep()}/${ret()}/`;}
+function compare(city){return `https://www.google.com/search?q=${encodeURIComponent("上海虹桥 "+city+" 往返机票")}`;}
+
+/* 国际 */
+function renderIntl(){
+  const grid=document.getElementById("grid"); grid.innerHTML="";
+  document.getElementById("count").textContent=`共 ${intlRoutes.length} 个航点（虹桥直飞出境全集）`;
+  intlRoutes.forEach(r=>{
+    const to=intlCode[r.city];
+    const rows=r.sample.map(s=>`<tr><td>${s.f}</td><td>${s.t}</td><td class="price">${s.p}</td></tr>`).join("");
+    const d=document.createElement("div");
+    d.className="dest"+(r.region==="rmt"?" rmt":"");
+    d.innerHTML=`
+      <div class="dhead"><div class="flag">${r.flag}</div><div class="dtitle">${r.city}</div>
+        <div class="tag ${r.region}">${r.region==="foreign"?"🌏 国外":"🇭🇰 港澳台"}</div></div>
+      <div class="meta"><span><b>落地</b> ${r.airport}</span><span><b>飞行</b> ${r.duration}</span><span><b>班次</b> ${r.freq}</span></div>
+      <div class="air">执飞：<b>${r.airlines.join(" · ")}</b></div>
+      <div class="row">
+        <a class="btn" target="_blank" rel="noopener" href="${sky("sha",to)}">🔍 查实时往返（Skyscanner）</a>
+        <a class="btn alt" target="_blank" rel="noopener" href="${compare(r.city)}">📋 全网比价</a>
+      </div>
+      <details class="sample"><summary>📌 真实示例航班（2026-10 采集，价格随日期浮动）</summary>
+        <table>${rows}</table><div class="note">以上仅为采集时的示例快照，不代表实时售价；请点上方按钮查最新。</div></details>`;
+    grid.appendChild(d);
+  });
+}
+
+/* 国内 */
+function renderDom(){
+  const g=document.getElementById("domGrid"); g.innerHTML="";
+  domestic.forEach(rg=>{
+    const chips=rg.cities.map(c=>`<a class="city" target="_blank" rel="noopener"
+      href="${sky("sha",c.c)}">${c.n}<span class="arr">→ 查往返</span></a>`).join("");
+    const sec=document.createElement("div");
+    sec.className="region";
+    sec.innerHTML=`<div class="rhead">${rg.region}<span class="n">${rg.note} · ${rg.cities.length} 城</span></div>
+      <div class="chips">${chips}</div>`;
+    g.appendChild(sec);
+  });
+}
+
+/* 切换 */
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+  const isDom=t.dataset.t==="dom";
+  document.getElementById("dom").classList.toggle("hidden",!isDom);
+  document.getElementById("intl").classList.toggle("hidden",isDom);
+}));
+
+document.getElementById("cityGo").addEventListener("click",()=>{
+  const v=document.getElementById("cityInput").value.trim(); if(!v)return;
+  window.open(compare(v),"_blank");
+});
+document.getElementById("cityInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter")document.getElementById("cityGo").click();
+});
+
+depEl.addEventListener("change",()=>{renderIntl();renderDom();});
+retEl.addEventListener("change",()=>{renderIntl();renderDom();});
+renderIntl(); renderDom();
+</script>
+</body>
+</html>

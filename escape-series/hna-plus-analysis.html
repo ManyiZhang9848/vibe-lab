@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海航PLUS 666档 · 上海往返适配分析（26冬春航季）</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --ink:#1a2233; --muted:#6b7484;
+  --line:#e6e9ef; --accent:#0f5fa8; --accent-soft:#e8f1fa;
+  --good:#0c8a54; --good-soft:#e6f5ee; --warn:#b96a00; --warn-soft:#fdf2e0;
+  --bad:#b03a3a; --bad-soft:#fbeaea; --tag-soft:#eef0f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:60px}
+.wrap{max-width:920px;margin:0 auto;padding:20px 16px}
+header{background:linear-gradient(135deg,#0f5fa8 0%,#0a3d73 100%);color:#fff;border-radius:16px;padding:28px 24px;margin-bottom:18px}
+header h1{font-size:22px;font-weight:700;margin-bottom:8px}
+header .sub{font-size:13px;opacity:.85}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:18px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat .num{font-size:26px;font-weight:700;color:var(--accent)}
+.stat .lab{font-size:12px;color:var(--muted)}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+section h2{font-size:17px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+section h2 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+section h2 .dot.g{background:var(--good)}
+.top-good{border:2px solid var(--good);box-shadow:0 2px 12px rgba(12,138,84,.08)}
+.note{font-size:13px;color:var(--muted);margin-bottom:12px}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:20px;background:var(--tag-soft);color:var(--muted);white-space:nowrap}
+.tag.g{background:var(--good-soft);color:var(--good)}
+.tag.w{background:var(--warn-soft);color:var(--warn)}
+.dest-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.dest{background:var(--accent-soft);color:var(--accent);font-size:13px;padding:4px 12px;border-radius:20px;font-weight:600}
+.dest.ok{background:var(--good-soft);color:var(--good)}
+.dest.warn{background:var(--warn-soft);color:var(--warn)}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+th{background:#f0f3f8;text-align:left;padding:8px 10px;font-size:12px;color:var(--muted);white-space:nowrap;position:sticky;top:0}
+td{padding:8px 10px;border-top:1px solid var(--line);white-space:nowrap}
+tr:hover td{background:#fafbfd}
+tr.cityrow td{background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:13px;border-top:2px solid var(--accent);padding:6px 10px}
+tr.pricerow td{background:#fbfcfe;color:var(--muted);font-size:12px;padding:5px 10px 8px 14px;border-top:1px dashed var(--line)}
+.route{font-weight:600}
+.route .arrow{color:var(--muted);font-weight:400;margin:0 4px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.fbtn{border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px;padding:6px 14px;border-radius:20px;cursor:pointer}
+.fbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.verdict{border-radius:12px;padding:14px 16px;margin-bottom:10px;font-size:14px}
+.verdict b{display:block;margin-bottom:4px}
+.v-good{background:var(--good-soft);border-left:4px solid var(--good)}
+.v-warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.v-bad{background:var(--bad-soft);border-left:4px solid var(--bad)}
+ol,ul{padding-left:20px;font-size:14px}
+li{margin-bottom:8px}
+.fine{font-size:12px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+footer{text-align:center;font-size:12px;color:var(--muted);margin-top:24px}
+.score{display:inline-block;background:var(--warn);color:#fff;font-size:11px;border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:2px}
+@media (max-width:600px){
+  header h1{font-size:18px}
+  section{padding:16px 14px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>海航PLUS「666档」上海往返适配分析</h1>
+  <div class="sub">数据来源：《海航PLUS适用航班 26冬春航线（A-Z排序版）》 · 航季 2026.10.25 – 2027.3.27 · 原始 65 条涉及上海，已剔除 20 条仅2666档航班，保留 666 元档可用 45 条</div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="num">45</div><div class="lab">666档可用航班</div></div>
+  <div class="stat"><div class="num">6</div><div class="lab">往返都通的目的地</div></div>
+  <div class="stat"><div class="num">7</div><div class="lab">仅可从上海出发</div></div>
+  <div class="stat"><div class="num">9</div><div class="lab">仅可飞回上海</div></div>
+</div>
+
+<section class="top-good">
+  <h2><span class="dot g"></span>✅ 能往返闭环的目的地（6 个）</h2>
+  <div class="note">随心飞按「单程段」兑换，往返 = 去程段 + 回程段，两段都得在适用清单里才算真正闭环。以下 6 个目的地 666 元档<b>去程、回程都能用</b>，买票无忧。</div>
+  <div class="verdict v-good">
+    <div class="dest-list" style="margin-top:0">
+      <span class="dest ok">三亚 <span class="tag g">天天往返</span></span>
+      <span class="dest ok">广州 <span class="tag g">天天往返</span></span>
+      <span class="dest ok">深圳 <span class="tag g">天天往返</span></span>
+      <span class="dest ok">北京 <span class="tag g">天天往返</span></span>
+      <span class="dest ok">天津 <span class="tag g">天天往返</span></span>
+      <span class="dest warn">贵阳 <span class="tag w">周六去周日回可行</span></span>
+    </div>
+  </div>
+  <div class="tbl-wrap" style="margin-top:12px"><table>
+    <tr><th>目的地</th><th>去程（上海出发）</th><th>回程（飞回上海）</th><th>飞行时长</th><th>评价</th></tr>
+    <tr><td><b>三亚</b></td><td>Y87501 浦东 7:05 每天</td><td>HU7321 浦东 7:20 每天</td><td>约3小时10分</td><td><span class="tag g">最稳</span></td></tr>
+    <tr><td><b>广州</b></td><td>HU7332 浦东 ~7:55 每天</td><td>HU7131 7:05 / HU7231 20:40 每天</td><td>约2小时25分</td><td><span class="tag g">最稳</span> 早去晚回任选</td></tr>
+    <tr><td><b>深圳</b></td><td>HU7728 浦东 20:30 每天</td><td>HU7721 7:40 / Y87565 每天 / HU7723 20:55</td><td>约2小时20分</td><td><span class="tag g">稳</span> 去程只有晚班</td></tr>
+    <tr><td><b>北京</b></td><td>HU7610 虹桥 20:55 每天；HU7614 浦东早班（6:55–7:55 分日）</td><td>HU7601 虹桥 7:25 / HU7609 20:15 每天</td><td>约2小时15分</td><td><span class="tag g">稳</span> 京沪线班次最多</td></tr>
+    <tr><td><b>天津</b></td><td>GS7874 浦东 21:00 每天；GS7882 一三五七 21:10</td><td>GS7883 二四六 / GS7881 一三五七 早8点</td><td>约2小时</td><td><span class="tag g">稳</span> 合计天天有回</td></tr>
+    <tr><td><b>贵阳</b></td><td>Y87509 浦东 6:45 仅周一/五/六</td><td>Y87510 浦东 22:30 仅四/五/日</td><td>约2小时55分</td><td><span class="score">受限</span> 周六去周日回恰好成立</td></tr>
+  </table></div>
+  <div class="note" style="margin-top:10px">时刻为航季表列时刻，具体以出票时为准。</div>
+</section>
+
+<section>
+  <h2><span class="dot"></span>不闭环的城市（666 元档口径，仅供参考）</h2>
+  <div class="verdict v-warn"><b>⚠️ 仅能从上海出发（回程需另想办法，7 个）</b>
+    <div class="dest-list">
+      <span class="dest warn">丽江</span><span class="dest warn">哈尔滨</span><span class="dest warn">长沙</span><span class="dest warn">青岛</span><span class="dest warn">安阳</span><span class="dest warn">邢台</span><span class="dest warn">重庆</span>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:6px">重庆去程为浦东 22:30 深夜班（回程航班仅2666档，已被剔除）。其余适合「单程飞出去、玩完从别的城市继续飞」的连线玩法。</div>
+  </div>
+  <div class="verdict v-bad"><b>↩️ 仅能飞回上海（9 个出发地）</b>
+    <div class="dest-list">
+      <span class="dest warn">成都天府</span><span class="dest warn">昆明</span><span class="dest warn">海口</span><span class="dest warn">珠海</span><span class="dest warn">柳州</span><span class="dest warn">洛阳</span><span class="dest warn">郑州</span><span class="dest warn">阆中</span><span class="dest warn">于田</span>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:6px">海口、珠海的去程航班仅2666档，666元档飞不出去，只能当回程段用。</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="dot"></span>全部 45 条 666档可用航班（按目的地分组 · 往返对照）</h2>
+  <div class="filters">
+    <button class="fbtn on" data-f="all">全部</button>
+    <button class="fbtn" data-f="out">上海出发</button>
+    <button class="fbtn" data-f="back">飞回上海</button>
+  </div>
+  <div class="note">组内按出行优先级排序：① 周末（六/日）或周五晚上有班的排最前（每天有班的算周末可用）→ 同级里晚间（18:00后）班排早班前 → 再按出发时刻排；单程城市组按单买票价从低到高排，组末灰色行是缺的那半段的单买参考价。票价为 2026年10月中旬 各平台经济舱裸票价量级（另加税费约¥100–140/程），<b>以 App 实时报价为准</b>。成本算法示例：丽江「飞出去 + 自己买回程」≈ 随心飞1段（税费约¥140）+ 回程机票 ¥400–1000 + 税费，总成本约 ¥550–1250；海口/珠海方向若常去，666档只能省回程一段，评估时记得打折。</div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>方向</th><th>航线</th><th>航班号</th><th>班期</th><th>出发时刻</th><th>飞行时长</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2><span class="dot"></span>要不要买：三个判断步骤</h2>
+  <ol>
+    <li><b>列计划。</b>写下未来半年内真实会飞的次数（愿望不算）。目的地在上面「闭环往返」6 个里才算完整利用；「仅去程/仅回程」的只能当半个航段用。</li>
+    <li><b>算回本。</b>粗算公式：计划航段数 × 你平时买这些航线的单程票价 ≥ 产品价 + 兑换时的税费，才划算。上海往返三亚/海口/丽江这类长线，旺季单程常在 ¥700–1500 一档，淡季可能 ¥400–700；短线（北京/天津/青岛）则低不少。<b>具体票价请以 App 实时报价为准</b>，以上只是量级参考。</li>
+    <li><b>查限制。</b>随心飞类产品通常有热门日期座位有限、需提前兑换、退改规则等条款，下单前以产品页规则为准。</li>
+  </ol>
+  <div class="verdict v-good" style="margin-top:14px"><b>一句话结论（666档口径）</b>666 元档真正能闭环往返的只有 6 个方向：三亚 / 广州 / 深圳 / 北京 / 天津 / 贵阳。如果半年内有 3 次以上飞这些方向的往返计划，值回票价；想去海口、珠海、昆明的，666 档飞不出去，要么上 2666 档要么单买。</div>
+</section>
+
+<div class="fine">免责说明：本页由《海航PLUS适用航班26冬春航线（A-Z排序版）》PDF 筛选整理，仅保留「适用666或2666」的航班，仅2666档可用的 20 条已剔除；参考票价为 2026年10月中旬 各订票平台经济舱裸票价的量级区间（另需机建¥50 + 燃油附加¥50–90/程），非实时报价，随淡旺季与出票日期波动明显，以航司 App / 官网实时报价为准；飞行时长为直飞时间或按航距推算（标「估」），以实际航班为准；航班班期、时刻以海航实际执行与产品页规则为准。</div>
+<footer>海航PLUS · 26冬春航季 · 上海往返适配分析（666档）</footer>
+</div>
+
+<script>
+const DATA = [{"dir": "back", "dep": "北京首都", "arr": "上海虹桥", "flt": "HU7601", "days": "每天", "time": "7:25", "prod": "666/2666"}, {"dir": "back", "dep": "北京首都", "arr": "上海虹桥", "flt": "HU7609", "days": "周一二三四五六", "time": "20:15", "prod": "666/2666"}, {"dir": "back", "dep": "北京首都", "arr": "上海虹桥", "flt": "HU7609", "days": "周日", "time": "20:30", "prod": "666/2666"}, {"dir": "back", "dep": "成都天府", "arr": "上海浦东", "flt": "HU7428", "days": "每天", "time": "20:00", "prod": "666/2666"}, {"dir": "back", "dep": "广州", "arr": "上海浦东", "flt": "HU7131", "days": "每天", "time": "7:05", "prod": "666/2666"}, {"dir": "back", "dep": "广州", "arr": "上海浦东", "flt": "HU7231", "days": "每天", "time": "20:40", "prod": "666/2666"}, {"dir": "back", "dep": "贵阳", "arr": "上海浦东", "flt": "Y87510", "days": "周四五日", "time": "22:30", "prod": "666/2666"}, {"dir": "back", "dep": "海口", "arr": "上海虹桥", "flt": "HU7319", "days": "每天", "time": "20:20", "prod": "666/2666"}, {"dir": "back", "dep": "海口", "arr": "上海浦东", "flt": "HU7119", "days": "每天", "time": "7:40", "prod": "666/2666"}, {"dir": "back", "dep": "海口", "arr": "上海浦东", "flt": "Y87506", "days": "每天", "time": "21:15", "prod": "666/2666"}, {"dir": "back", "dep": "昆明", "arr": "上海虹桥", "flt": "8L9837", "days": "周二四六", "time": "7:05", "prod": "666/2666"}, {"dir": "back", "dep": "阆中", "arr": "上海浦东", "flt": "Y87558", "days": "周一三五日", "time": "21:40", "prod": "666/2666"}, {"dir": "back", "dep": "柳州", "arr": "上海浦东", "flt": "Y87546", "days": "每天", "time": "20:30", "prod": "666/2666"}, {"dir": "back", "dep": "洛阳", "arr": "上海浦东", "flt": "Y87512", "days": "周二四六", "time": "21:45", "prod": "666/2666"}, {"dir": "back", "dep": "三亚", "arr": "上海浦东", "flt": "HU7321", "days": "每天", "time": "7:20", "prod": "666/2666"}, {"dir": "out", "dep": "上海虹桥", "arr": "北京首都", "flt": "HU7610", "days": "每天", "time": "20:55", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "安阳", "flt": "Y87559", "days": "周一三五日", "time": "7:00", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "北京首都", "flt": "HU7614", "days": "周三四五日", "time": "6:55", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "北京首都", "flt": "HU7614", "days": "周二六", "time": "7:20", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "北京首都", "flt": "HU7614", "days": "周一", "time": "7:55", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "长沙", "flt": "HU7758", "days": "周一三五日", "time": "21:00", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "重庆江北", "flt": "PN6438", "days": "每天", "time": "22:30", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "广州", "flt": "HU7332", "days": "周三五日", "time": "7:55", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "广州", "flt": "HU7332", "days": "周二四六", "time": "7:55", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "广州", "flt": "HU7332", "days": "周一", "time": "8:00", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "贵阳", "flt": "Y87509", "days": "周一五六", "time": "6:45", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "哈尔滨", "flt": "Y87507", "days": "每天", "time": "6:45", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "丽江", "flt": "JD5666", "days": "周一三五日", "time": "20:25", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "青岛", "flt": "Y87513", "days": "周二四六", "time": "7:45", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "三亚", "flt": "Y87501", "days": "每天", "time": "7:05", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "深圳", "flt": "HU7728", "days": "周一三五日", "time": "20:30", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "深圳", "flt": "HU7728", "days": "周二四六", "time": "20:30", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "天津", "flt": "GS7874", "days": "每天", "time": "21:00", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "天津", "flt": "GS7882", "days": "周一三五日", "time": "21:10", "prod": "666/2666"}, {"dir": "out", "dep": "上海浦东", "arr": "邢台", "flt": "Y87553", "days": "周二四六", "time": "6:55", "prod": "666/2666"}, {"dir": "back", "dep": "深圳", "arr": "上海浦东", "flt": "HU7721", "days": "每天", "time": "7:40", "prod": "666/2666"}, {"dir": "back", "dep": "深圳", "arr": "上海浦东", "flt": "HU7723", "days": "周一二三五六日", "time": "20:55", "prod": "666/2666"}, {"dir": "back", "dep": "深圳", "arr": "上海浦东", "flt": "HU7723", "days": "周四", "time": "21:00", "prod": "666/2666"}, {"dir": "back", "dep": "深圳", "arr": "上海浦东", "flt": "Y87565", "days": "周一三五日", "time": "6:40", "prod": "666/2666"}, {"dir": "back", "dep": "深圳", "arr": "上海浦东", "flt": "Y87565", "days": "周二四六", "time": "7:15", "prod": "666/2666"}, {"dir": "back", "dep": "天津", "arr": "上海虹桥", "flt": "GS7883", "days": "周二四六", "time": "8:00", "prod": "666/2666"}, {"dir": "back", "dep": "天津", "arr": "上海浦东", "flt": "GS7881", "days": "周一三五日", "time": "8:00", "prod": "666/2666"}, {"dir": "back", "dep": "于田", "arr": "上海浦东", "flt": "UQ2599", "days": "每天", "time": "7:00", "prod": "666/2666"}, {"dir": "back", "dep": "郑州", "arr": "上海浦东", "flt": "Y87520", "days": "每天", "time": "23:20", "prod": "666/2666"}, {"dir": "back", "dep": "珠海", "arr": "上海浦东", "flt": "Y87516", "days": "每天", "time": "20:10", "prod": "666/2666"}];
+const DUR = {'北京首都':'约2小时15分','广州':'约2小时25分','贵阳':'约2小时55分','三亚':'约3小时10分','深圳':'约2小时20分','天津':'约2小时','安阳':'约2小时(估)','长沙':'约1小时55分','重庆江北':'约2小时55分','哈尔滨':'约2小时55分','丽江':'约3小时45分','青岛':'约1小时35分','邢台':'约2小时(估)','成都天府':'约3小时5分','海口':'约3小时10分','昆明':'约3小时20分','阆中':'约2小时50分(估)','柳州':'约2小时40分(估)','洛阳':'约1小时55分(估)','于田':'约5小时30分(估)','郑州':'约2小时5分','珠海':'约2小时20分'};
+const ONE = {'青岛':['¥200–500','常年特价¥200上下，有时不如高铁'],'哈尔滨':['¥250–700','冬季冰雪季价格会上浮明显'],'长沙':['¥300–700','与高铁竞争，票价常年偏低'],'郑州':['¥300–700','回程 23:20 深夜班'],'珠海':['¥350–700','去程666档飞不出去，只能单买去程'],'重庆江北':['¥350–700','去程仅浦东 22:30 深夜班'],'昆明':['¥400–800','666档回程仅二四六早班'],'洛阳':['¥400–900 (估)','仅二四六 21:45 晚班'],'安阳':['¥400–900 (估)','支线小机场，班次少'],'邢台':['¥400–900 (估)','支线小机场，仅二四六早班'],'丽江':['¥400–1000','特价时见过¥200–380'],'成都天府':['¥450–800','回程每天 20:00 晚班'],'柳州':['¥500–1000 (估)','每天 20:30 晚班'],'阆中':['¥500–1100 (估)','仅一三五七 21:40 晚班，川东北小机场'],'海口':['¥700–1500','去程666档飞不出去，只能单买去程'],'于田':['¥1200–2500 (估)','新疆和田地区，超长航线，票价波动大']};
+const tbody = document.getElementById('tbody');
+const dirCN = {out:'出发 →', back:'← 返回'};
+function render(f){
+  const mk = d => `<tr>
+    <td>${dirCN[d.dir]}</td>
+    <td class="route">${d.dep}<span class="arrow">→</span>${d.arr}</td>
+    <td>${d.flt}</td><td>${d.days}</td><td>${d.time}</td>
+    <td>${DUR[d.dir==='out'?d.arr:d.dep]||'—'}</td>
+  </tr>`;
+  const hour = d => parseInt(d.time);
+  const eve = d => hour(d) >= 18;
+  const tier = d => {
+    const wknd = d.days.includes('每天') || d.days.includes('六') || d.days.includes('日');
+    return (wknd || (d.days.includes('五') && eve(d))) ? 0 : 1;
+  };
+  const byPri = (a,b) => tier(a) - tier(b) || (eve(a)?0:1) - (eve(b)?0:1) || hour(a) - hour(b);
+  let rows = [];
+  if(f==='out'){ rows = DATA.filter(d=>d.dir==='out').sort(byPri).map(mk); }
+  else if(f==='back'){ rows = DATA.filter(d=>d.dir==='back').sort(byPri).map(mk); }
+  else {
+    const cities = [], cityMap = {};
+    DATA.filter(d=>d.dir==='out').forEach(d=>{
+      if(!cityMap[d.arr]){cityMap[d.arr]={out:[],back:[]};cities.push(d.arr);}
+      cityMap[d.arr].out.push(d);
+    });
+    DATA.filter(d=>d.dir==='back').forEach(d=>{
+      if(!cityMap[d.dep]){cityMap[d.dep]={out:[],back:[]};cities.push(d.dep);}
+      cityMap[d.dep].back.push(d);
+    });
+    cities.sort((a,b)=>{
+      const ga = cityMap[a], gb = cityMap[b];
+      const ra = ga.out.length && ga.back.length ? 0 : 1;
+      const rb = gb.out.length && gb.back.length ? 0 : 1;
+      if(ra !== rb) return ra - rb;
+      if(ra === 1){
+        const pa = ONE[a] ? parseInt(ONE[a][0].replace('¥','')) : 9999;
+        const pb = ONE[b] ? parseInt(ONE[b][0].replace('¥','')) : 9999;
+        return pa - pb;
+      }
+      return 0;
+    });
+    cities.forEach(c=>{
+      const g = cityMap[c];
+      g.out.sort(byPri); g.back.sort(byPri);
+      rows.push(`<tr class="cityrow"><td colspan="6">${c}　·　去 ${g.out.length} 班 / 回 ${g.back.length} 班${g.out.length&&g.back.length?'　✅ 往返都通':'　⚠️ 仅'+(g.out.length?'去程':'回程')+'可用'}</td></tr>`);
+      g.out.forEach(d=>rows.push(mk(d)));
+      g.back.forEach(d=>rows.push(mk(d)));
+      const o = ONE[c];
+      if(o) rows.push(`<tr class="pricerow"><td colspan="6">💰 缺的那半段单买参考：${o[0]}（税费另约¥100–140/程）· ${DUR[c]||''} · ${o[1]}</td></tr>`);
+    });
+  }
+  tbody.innerHTML = rows.join('');
+}
+render('all');
+document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+}));
+</script>
+</body>
+</html>
